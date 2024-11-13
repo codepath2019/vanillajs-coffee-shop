@@ -1,7 +1,10 @@
-import API from "./services/API.js";
+import { getMenuData } from "./services/Menu.js";
 import Store from "./services/Store.js";
+
+window.app = {};
+app.store = Store;
+
 // Wait for DOM is ready for manipulation before execution of app script
 window.addEventListener("DOMContentLoaded", async () => {
-  const response = await API.fetchMenu();
-  Store.menu = response;
+  window.app.store.menu = await getMenuData();
 });
