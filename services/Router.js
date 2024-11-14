@@ -7,6 +7,11 @@ const Router = {
         Router.go(url);
       });
     });
+    // Handle url change event to make sure that browser back and forward buttons
+    // synchronize history chnage with client side router
+    window.addEventListener("popstate", (event) => {
+      Router.go(event.state.route, false);
+    });
   },
   go: (route, addToHistory = true) => {
     console.log(`Going to ${route}`);
@@ -25,6 +30,7 @@ const Router = {
         pageElement.textContent = "Cart";
         break;
     }
+
     if (pageElement) {
       const mainElement = document.querySelector("main");
       mainElement.innerHTML = "";
