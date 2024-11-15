@@ -12,6 +12,8 @@ const Router = {
     window.addEventListener("popstate", (event) => {
       Router.go(event.state.route, false);
     });
+
+    Router.go(location.pathname);
   },
   go: (route, addToHistory = true) => {
     console.log(`Going to ${route}`);

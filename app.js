@@ -16,6 +16,10 @@ app.router = Router;
 
 // Wait for DOM is ready for manipulation before execution of app script
 window.addEventListener("DOMContentLoaded", async () => {
-  window.app.store.menu = await getMenuData();
+  // NOTE: of app.router.init() comes after the initialization of menu store
+  // then any initial data fetch, in this case, the only data fetch for menu data
+  // will not trigger the event handler for appmenuchange! This is problematic!
+  // What's a way to solve this?
   app.router.init();
+  window.app.store.menu = await getMenuData();
 });
