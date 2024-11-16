@@ -30,6 +30,13 @@ const Router = {
         pageElement = document.createElement("order-page");
         pageElement.textContent = "Cart";
         break;
+      default:
+        if (route.startsWith("/product-")) {
+          pageElement = document.createElement("h1");
+          pageElement.textContent = "Details";
+          const productParamId = route.substring(route.lastIndexOf("-") + 1);
+          pageElement.dataset.id = productParamId;
+        }
     }
 
     if (pageElement) {

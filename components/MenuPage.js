@@ -19,6 +19,7 @@ export class MenuPage extends HTMLElement {
     const templateElement = document.getElementById("menu-page-template");
     const content = templateElement.content.cloneNode(true);
     this.root.appendChild(content);
+    this.render();
     window.addEventListener("appmenuchange", () => {
       this.render();
     });
@@ -26,6 +27,7 @@ export class MenuPage extends HTMLElement {
 
   render() {
     if (app.store.menu) {
+      this.root.querySelector("#menu").innerHTML = "";
       for (const category of app.store.menu) {
         const categoryLi = document.createElement("li");
         categoryLi.innerHTML = `
@@ -33,6 +35,12 @@ export class MenuPage extends HTMLElement {
           <ul class="category"></ul>
         `;
         this.root.querySelector("#menu").appendChild(categoryLi);
+
+        category.products.forEach((product) => {
+          const productItemElement = document.createElement("product-item");
+          productItemElement.dataset.product = JSON.stringify(product);
+          categoryLi.querySelector("ul").appendChild(productItemElement);
+        });
       }
     } else {
       this.root.querySelector("#menu").innerHTML =
