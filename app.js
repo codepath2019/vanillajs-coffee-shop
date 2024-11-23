@@ -1,4 +1,4 @@
-import { getMenuData } from "./services/Menu.js";
+import { loadMenuData } from "./services/Menu.js";
 import Router from "./services/Router.js";
 import Store from "./services/Store.js";
 
@@ -24,5 +24,5 @@ window.addEventListener("DOMContentLoaded", async () => {
   // will not trigger the event handler for appmenuchange! This is problematic!
   // What's a way to solve this?
   app.router.init();
-  window.app.store.menu = await getMenuData();
+  loadMenuData();
 });
