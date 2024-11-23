@@ -1,4 +1,10 @@
 export class OrderPage extends HTMLElement {
+  #user = {
+    name: "",
+    phone: "",
+    email: "",
+  };
+
   constructor() {
     super();
 
@@ -54,7 +60,29 @@ export class OrderPage extends HTMLElement {
                 <p class='price-total'>$${total.toFixed(2)}</p>
             </li>
         `;
+      this.setFormBindings(this.root.querySelector("form"));
     }
+  }
+
+  setFormBindings(form) {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      alert(
+        `Thank you ${
+          this.#user.name
+        } for your order! Your receipt will be sent to ${this.#user.email}`
+      );
+      this.#user.name = "";
+      this.#user.phone = "";
+      this.#user.email = "";
+      form.reset();
+    });
+
+    Array.from(form.elements).forEach((element) => {
+      element.addEventListener("change", (event) => {
+        this.#user[element.name] = event.target.value;
+      });
+    });
   }
 }
 customElements.define("order-page", OrderPage);
