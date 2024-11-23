@@ -11,6 +11,10 @@ const StoreProxy = new Proxy(Store, {
       const appMenuDataChangeEvent = new Event("appmenuchange");
       window.dispatchEvent(appMenuDataChangeEvent);
     }
+    if (prop == "cart") {
+      const appCartDataChangeEvent = new Event("appcartchange");
+      window.dispatchEvent(appCartDataChangeEvent);
+    }
     return true;
   },
 });

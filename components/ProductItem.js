@@ -1,3 +1,4 @@
+import { addToCart } from "../services/Order.js";
 import Router from "../services/Router.js";
 
 export class ProductItem extends HTMLElement {
@@ -21,7 +22,7 @@ export class ProductItem extends HTMLElement {
     productItemLinkElement.addEventListener("click", (e) => {
       e.preventDefault();
       if (e.target.tagName.toLowerCase() == "button") {
-        alert("Feature: adding to cart, is being developed {^_^}");
+        addToCart(productData.id);
       } else {
         Router.go(`/product-${productData.id}`);
       }

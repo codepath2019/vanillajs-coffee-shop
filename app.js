@@ -26,3 +26,11 @@ window.addEventListener("DOMContentLoaded", async () => {
   app.router.init();
   loadMenuData();
 });
+
+// NOTE: listening to custom data change event to reactively change badge
+window.addEventListener("appcartchange", (_e) => {
+  const badge = document.getElementById("badge");
+  const qty = app.store.cart.reduce((acc, item) => acc + item.quantity, 0);
+  badge.textContent = qty;
+  badge.hidden = qty == 0;
+});

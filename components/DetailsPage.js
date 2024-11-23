@@ -1,4 +1,5 @@
-import { loadMenuData } from "../services/Menu.js";
+import { getProductById, loadMenuData } from "../services/Menu.js";
+import { addToCart } from "../services/Order.js";
 
 export class DetailsPage extends HTMLElement {
   constructor() {
@@ -32,13 +33,7 @@ export class DetailsPage extends HTMLElement {
     }
 
     if (productId) {
-      for (const category of app.store.menu) {
-        for (const product of category.products) {
-          if (product.id === parseInt(productId)) {
-            currentProduct = product;
-          }
-        }
-      }
+      currentProduct = await getProductById(productId);
       this.root.querySelector("h2").textContent = currentProduct.name;
       this.root
         .querySelector("img")
@@ -46,6 +41,10 @@ export class DetailsPage extends HTMLElement {
       this.root.querySelector(".description").textContent =
         currentProduct.description;
       this.root.querySelector(".price").textContent = currentProduct.price;
+      this.root.querySelector("button").addEventListener("click", () => {
+        addToCart(productId);
+        app.router.go("/order");
+      });
     } else {
       alert("Sorry! We cannot find the prodcut you are looking for!");
     }
