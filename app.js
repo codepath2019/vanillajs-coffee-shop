@@ -3,6 +3,7 @@ import Router from "./services/Router.js";
 import Store from "./services/Store.js";
 
 // Link web components
+import { CartItem } from "./components/CartItem.js";
 import { DetailsPage } from "./components/DetailsPage.js";
 import { MenuPage } from "./components/MenuPage.js";
 import { OrderPage } from "./components/OrderPage.js";
@@ -12,6 +13,7 @@ MenuPage;
 DetailsPage;
 OrderPage;
 ProductItem;
+CartItem;
 
 window.app = {};
 app.store = Store;

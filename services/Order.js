@@ -13,3 +13,7 @@ export async function addToCart(id) {
     app.store.cart = [...app.store.cart, { product, quantity: 1 }];
   }
 }
+
+export async function removeFromCart(id) {
+  app.store.cart = app.store.cart.filter((p) => p.product.id !== id);
+}
